@@ -1,4 +1,4 @@
-
+#kahdklfhaklsdhf
 \\ Modulo Crear cuenta (La cuenta es única y solo puede aparecer una vez (Activa o inactiva))
 1| ID de la cuenta| Numero de Cuenta | CUI  | Tipo de Cuenta | Moneda    | Estado   | Saldo  | Eliminación Lógica
 2| 0000001	  | AAA000234	     | 1312 | Monetaria	     | Quetzales | Inactivo |  0.00  | 0
