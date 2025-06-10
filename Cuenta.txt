@@ -1,0 +1,43 @@
+import java.io.FileWriter. java cuenta;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class RegistroCuenta {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            FileWriter escritor = new FileWriter("Cuenta.txt", true);
+            
+
+            System.out.print("Ingrese ID de la Cuenta Bancaria: ");
+            String idCuenta = scanner.nextLine();
+
+            System.out.print("Ingrese Numero de Cuenta Bancaria (IBAN): ");
+            String iban = scanner.nextLine();
+
+            System.out.print("Ingrese CUI del dueño de la cuenta: ");
+            String cui = scanner.nextLine();
+
+            System.out.print("Ingrese Tipo de Cuenta (Ahorro/Monetaria): ");
+            String tipoCuenta = scanner.nextLine();
+
+            System.out.print("Ingrese Moneda (Quetzales/Dolares): ");
+            String moneda = scanner.nextLine();
+
+            System.out.print("Ingrese Saldo: ");
+            String saldo = scanner.nextLine();
+
+            
+            escritor.write(idCuenta + "," + iban + "," + cui + "," + tipoCuenta + "," + moneda + "," + saldo + "\n");
+
+            escritor.close();
+            System.out.println("Cuenta registrada correctamente.");
+
+        } catch (IOException e) {
+            System.out.println("Ocurrio un error al escribir en el archivo: " + e.getMessage());
+        }
+
+        scanner.close();
+    }
+}
