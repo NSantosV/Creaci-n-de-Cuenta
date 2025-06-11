@@ -1,0 +1,73 @@
+package control_ingresos_egresos_persona;
+
+import java.io.*;
+import java.util.*;
+
+public class Cuenta {
+    private String idCuenta;
+    private String numeroCuenta;
+    private String cui;
+    private String tipo;
+    private String moneda;
+    private double saldo;
+
+    public Cuenta(String idCuenta, String numeroCuenta, String cui, String tipo, String moneda, double saldo) {
+        this.idCuenta = idCuenta;
+        this.numeroCuenta = numeroCuenta;
+        this.cui = cui;
+        this.tipo = tipo;
+        this.moneda = moneda;
+        this.saldo = saldo;
+    }
+
+    public void guardarCuenta() throws IOException {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("Cuenta.txt", true))) {
+            bw.write(idCuenta + "," + numeroCuenta + "," + cui + "," + tipo + "," + moneda + "," + saldo);
+            bw.newLine();
+        }
+    }
+
+    public static String generarIDCuentaUnico() throws IOException {
+        Set<String> existentes = new HashSet<>();
+        File archivo = new File("Cuenta.txt");
+        if (archivo.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
+                String linea;
+                while ((linea = reader.readLine()) != null) {
+                    String[] datos = linea.split(",");
+                    existentes.add(datos[0]);
+                }
+            }
+        }
+
+        Random random = new Random();
+        String nuevo;
+        do {
+            nuevo = String.format("%06d", random.nextInt(1000000));
+        } while (existentes.contains(nuevo));
+
+        return nuevo;
+    }
+
+    public static String generarNumeroCuentaUnico() throws IOException {
+        Set<String> existentes = new HashSet<>();
+        File archivo = new File("Cuenta.txt");
+        if (archivo.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
+                String linea;
+                while ((linea = reader.readLine()) != null) {
+                    String[] datos = linea.split(",");
+                    existentes.add(datos[1]);
+                }
+            }
+        }
+
+        Random random = new Random();
+        String nuevo;
+        do {
+            nuevo = String.format("%010d", random.nextLong(1_000_000_0000L));
+        } while (existentes.contains(nuevo));
+
+        return nuevo;
+    }
+}
